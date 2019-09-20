@@ -53,7 +53,7 @@ export default class MajorCard extends React.Component {
             <>
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Major ({majors.length})</CardTitle>
+                        <CardTitle tag="h5">Major ({majors.length})</CardTitle>
                     </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
@@ -78,7 +78,7 @@ export default class MajorCard extends React.Component {
                                         <>
                                             {
                                                 major.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr>
+                                                <tr style={{cursor: "pointer"}}>
                                                     <td>{major.id}</td>
                                                     <td>{major.name}</td>
                                                     <td>{major.faculty}</td>

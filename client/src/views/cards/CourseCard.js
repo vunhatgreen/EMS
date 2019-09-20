@@ -49,7 +49,7 @@ export default class CourseCard extends React.Component {
             <>
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Course ({courses.length})</CardTitle>
+                        <CardTitle tag="h5">Course ({courses.length})</CardTitle>
                     </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
@@ -73,7 +73,7 @@ export default class CourseCard extends React.Component {
                                         <>
                                             {
                                                 course.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr>
+                                                <tr style={{cursor: "pointer"}}>
                                                     <td>{course.id}</td>
                                                     <td>{course.name}</td>
                                                 </tr>
