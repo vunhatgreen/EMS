@@ -52,13 +52,27 @@ export default class Tables extends React.Component {
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}
-                        > Course
+                        > Subject
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '4' })}
                             onClick={() => { this.toggle('4'); }}
+                        > Program
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '5' })}
+                            onClick={() => { this.toggle('5'); }}
+                        > Course
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '6' })}
+                            onClick={() => { this.toggle('6'); }}
                         > User
                         </NavLink>
                     </NavItem>
@@ -81,11 +95,25 @@ export default class Tables extends React.Component {
                     <TabPane tabId="3">
                         <Row>
                             <Col>
-                                <CourseCard />
+                            
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="4">
+                        <Row>
+                            <Col>
+                            
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="5">
+                        <Row>
+                            <Col>
+                                <CourseCard />
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="6">
                         <Row>
                             <Col>
                                 <UserCard />

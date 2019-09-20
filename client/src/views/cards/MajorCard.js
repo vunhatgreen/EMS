@@ -17,19 +17,23 @@ export default class MajorCard extends React.Component {
         majors: [
             {
                 id: 1,
-                name: "Computer Science"
+                name: "Computer Science",
+                faculty: "CSE"
             },
             {
                 id: 2,
-                name: "Information Technology"
+                name: "Information Technology",
+                faculty: "CSE"
             },
             {
                 id: 3,
-                name: "Computer Engineering"
+                name: "Computer Engineering",
+                faculty: "CSE"
             },
             {
                 id: 4,
-                name: "Data Analysis"
+                name: "Data Analysis",
+                faculty: "CSE"
             }
         ]
     }
@@ -65,6 +69,7 @@ export default class MajorCard extends React.Component {
                                 <tr>
                                     <th width="20%">ID</th>
                                     <th>Major</th>
+                                    <th>Faculty</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,6 +81,7 @@ export default class MajorCard extends React.Component {
                                                 <tr>
                                                     <td>{major.id}</td>
                                                     <td>{major.name}</td>
+                                                    <td>{major.faculty}</td>
                                                 </tr>
                                             }
                                         </>

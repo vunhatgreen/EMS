@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'reactstrap'
 
-export default class Typography extends React.Component {
+export default class Configuration extends React.Component {
     render() {
         return (
             <div>
