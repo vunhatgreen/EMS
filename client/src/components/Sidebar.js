@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Nav } from "reactstrap";
 import PerfectScrollbar from "perfect-scrollbar";
 
-// import logo from "logo.svg";
+import logo from "../logo.svg";
 
 var ps;
 
@@ -40,18 +40,18 @@ class Sidebar extends React.Component {
       >
         <div className="logo">
           <a
-            href="https://www.creative-tim.com"
+            href="/"
             className="simple-text logo-mini"
           >
-            {/* <div className="logo-img">
+            <div className="logo-img">
               <img src={logo} alt="react-logo" />
-            </div> */}
+            </div>
           </a>
           <a
-            href="https://www.creative-tim.com"
+            href="/"
             className="simple-text logo-normal"
           >
-            EMS
+            Edu System
           </a>
         </div>
         <div className="sidebar-wrapper" ref={this.sidebar}>

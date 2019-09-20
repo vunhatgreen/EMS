@@ -2,8 +2,10 @@ import React from 'react'
 import routes from "../routes.js"
 import { Route, Switch } from "react-router-dom";
 import Sidebar from '../components/Sidebar'
-import Header from '../components/Header.js';
-import Footer from '../components/Footer.js';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import PerfectScrollbar from 'perfect-scrollbar'
+var ps;
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -15,6 +17,30 @@ export default class Admin extends React.Component {
         this.mainPanel = React.createRef();
     }
 
+    componentDidMount() {
+        if (navigator.platform.indexOf("Win") > -1) {
+          ps = new PerfectScrollbar(this.mainPanel.current);
+          document.body.classList.toggle("perfect-scrollbar-on");
+        }
+      }
+      componentWillUnmount() {
+        if (navigator.platform.indexOf("Win") > -1) {
+          ps.destroy();
+          document.body.classList.toggle("perfect-scrollbar-on");
+        }
+      }
+      componentDidUpdate(e) {
+        if (e.history.action === "PUSH") {
+          this.mainPanel.current.scrollTop = 0;
+          document.scrollingElement.scrollTop = 0;
+        }
+      }
+      handleActiveClick = color => {
+        this.setState({ activeColor: color });
+      };
+      handleBgClick = color => {
+        this.setState({ backgroundColor: color });
+      };
     render() {
         return (
             <div className="wrapper">
