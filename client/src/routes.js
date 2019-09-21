@@ -1,11 +1,9 @@
-import Dashboard from "./views/Dashboard.js";
-import Notifications from "./views/Notifications.js";
-import Icons from "./views/Icons.js";
-import Management from "./views/Management.js";
-import Maps from "./views/Map.js";
-import UserPage from "./views/User.js";
-import UpgradeToPro from "./views/Upgrade.js";
-import Configuration from "./views/Configuration.js";
+import Dashboard from "./views/Dashboard.js"
+import Management from "./views/Management.js"
+import UserPage from "./views/User.js"
+import UpgradeToPro from "./views/Upgrade.js"
+import Configuration from "./views/Configuration.js"
+import Bulletin from "./views/Bulletin.js"
 
 var routes = [
   {
@@ -15,13 +13,13 @@ var routes = [
     component: Dashboard,
     layout: "/admin"
   },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-diamond",
-  //   component: Icons,
-  //   layout: "/admin"
-  // },
+  {
+    path: "/bulletin",
+    name: "Bulletin",
+    icon: "nc-icon nc-bullet-list-67",
+    component: Bulletin,
+    layout: "/admin"
+  },
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -53,17 +51,17 @@ var routes = [
   {
     path: "/configuration",
     name: "Configuration",
-    icon: "nc-icon nc-caps-small",
+    icon: "nc-icon nc-settings",
     component: Configuration,
     layout: "/admin"
   },
-  // {
-  //   pro: true,
-  //   path: "/upgrade",
-  //   name: "Upgrade to PRO",
-  //   icon: "nc-icon nc-spaceship",
-  //   component: UpgradeToPro,
-  //   layout: "/admin"
-  // }
+  {
+    pro: true,
+    path: "/upgrade",
+    name: "Upgrade to PRO",
+    icon: "nc-icon nc-spaceship",
+    component: UpgradeToPro,
+    layout: "/admin"
+  }
 ];
 export default routes;

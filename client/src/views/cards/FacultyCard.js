@@ -1,7 +1,9 @@
 import React from 'react'
 import {
     Input,
+    Label,
     Modal,
+    FormGroup,
     ModalHeader,
     ModalBody,
     ModalFooter,
@@ -15,30 +17,23 @@ import {
     CardBody,
     CardTitle
 } from 'reactstrap'
+import axios from 'axios'
+import Notification from '../../components/Notification'
 
 export default class FacultyCard extends React.Component {
     state = {
         filter: "",
         id: "",
         name: "",
-        faculties: [
-            {
-                id: 1,
-                name: "Computer Science and Engineering"
-            },
-            {
-                id: 2,
-                name: "Logistic"
-            },
-            {
-                id: 3,
-                name: "Business Analysis"
-            },
-            {
-                id: 4,
-                name: "Electrical Engineering"
-            }
-        ]
+        faculties: []
+    }
+    getFaculties() {
+        axios.get("/api/faculties").then(res =>
+            this.setState({ faculties: res.data })
+        )
+    }
+    componentWillMount() {
+        this.getFaculties()
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -47,12 +42,18 @@ export default class FacultyCard extends React.Component {
             });
         }
     }
-    toggleModal = e => {
-        this.setState({id: e.target.id})
+    toggleModal = faculty => {
+        if (faculty) this.setState({ id: faculty.id, name: faculty.name })
         this.setState(prevState => ({
             modal: !prevState.modal
         }))
     }
+    delete = e => {
+        axios.delete('/api/faculties/' + this.state.id)
+        this.getFaculties()
+        this.toggleModal()
+    }
+
     change = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -61,9 +62,6 @@ export default class FacultyCard extends React.Component {
         return (
             <>
                 <Card>
-                    <CardHeader>
-                        <CardTitle tag="h5">Faculty ({faculties.length})</CardTitle>
-                    </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Search name..." />
@@ -86,7 +84,7 @@ export default class FacultyCard extends React.Component {
                                         <>
                                             {
                                                 faculty.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr onClick={this.toggleModal} style={{cursor: "pointer"}} id={faculty.id}>
+                                                <tr onClick={() => this.toggleModal(faculty)} style={{ cursor: "pointer" }}>
                                                     <td>{faculty.id}</td>
                                                     <td>{faculty.name}</td>
                                                 </tr>
@@ -96,23 +94,26 @@ export default class FacultyCard extends React.Component {
                                 }
                             </tbody>
                         </Table>
+                        <label className="float-right"><h6>Total: {faculties.length}</h6></label>
                     </CardBody>
                 </Card>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                    {/* <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader> */}
                     <ModalBody>
-                        <label>ID</label>
-                        <Input value={id} onChange={this.change} name="id"/>
-                        <label>Name</label>
-                        <Input value={name} onChange={this.change} name="name"/>
+                        <FormGroup>
+                            <Label>ID</Label>
+                            <Input value={id} onChange={this.change} name="id" />
+                            <Label>Name</Label>
+                            <Input value={name} onChange={this.change} name="name" />
+                        </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggleModal}>Change</Button>{' '}
-                        <Button color="danger" onClick={this.toggleModal}>Delete</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                        <Button color="primary" onClick={this.toggleModal} className="float-left"><i class="nc-icon nc-check-2" /> EDIT</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> CANCEL</Button> {' '}
+                        <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> DELETE</Button>
                     </ModalFooter>
                 </Modal>
+
             </>
         )
     }

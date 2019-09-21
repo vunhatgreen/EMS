@@ -1,9 +1,10 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 app.listen(3001)
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-require('mongoose').connect('mongodb://localhost/ems', { useCreateIndex: true, useNewUrlParser: true })
+require('mongoose').connect('mongodb://localhost/ems', { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true })
 
 const cFaculty = require('./controllers/faculty')
 app.route('/api/faculties')
