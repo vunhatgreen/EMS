@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
+import axios from "axios"
 import {
   Collapse,
   Navbar,
@@ -11,11 +12,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Container,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-  Input
+  Container
 } from "reactstrap";
 
 import routes from "../routes.js";
@@ -90,6 +87,10 @@ export default class Header extends React.Component {
       this.sidebarToggle.current.classList.toggle("toggled");
     }
   }
+  clearCookie() {
+    axios.get('/clear-cookie')
+    window.location.reload()
+  }
   render() {
     return (
       // add or remove classes depending if we are on full-screen-maps page or not
@@ -121,7 +122,7 @@ export default class Header extends React.Component {
                 <span className="navbar-toggler-bar bar3" />
               </button>
             </div>
-            <NavbarBrand href="/">{this.getBrand()}</NavbarBrand>
+            <NavbarBrand>{this.getBrand()}</NavbarBrand>
           </div>
           <NavbarToggler onClick={this.toggle}>
             <span className="navbar-toggler-bar navbar-kebab" />
@@ -144,14 +145,14 @@ export default class Header extends React.Component {
               </InputGroup>
             </form> */}
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <Link to="#pablo" className="nav-link btn-magnify">
                   <i className="nc-icon nc-layout-11" />
                   <p>
                     <span className="d-lg-none d-md-block">Stats</span>
                   </p>
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <Dropdown
                 nav
                 isOpen={this.state.dropdownOpen}
@@ -170,10 +171,10 @@ export default class Header extends React.Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <Link to="#pablo" className="nav-link btn-rotate">
-                  <i className="nc-icon nc-settings-gear-65" />
+                <Link className="nav-link btn-rotate" onClick={this.clearCookie}>
+                  <i className="nc-icon nc-button-power" />
                   <p>
-                    <span className="d-lg-none d-md-block">Account</span>
+                    <span className="d-lg-none d-md-block">Log out</span>
                   </p>
                 </Link>
               </NavItem>
