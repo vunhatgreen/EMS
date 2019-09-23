@@ -11,7 +11,7 @@ require('mongoose').connect('mongodb://localhost/ems', { useCreateIndex: true, u
 const auth = basicAuth({
     users: {
         admin: '123',
-        user: '456',
+        user: '456'
     },
 });
 app.use(cookieParser('82e4e438a0705fabf61f9854e3b575af'))

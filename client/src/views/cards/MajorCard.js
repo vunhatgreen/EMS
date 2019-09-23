@@ -52,9 +52,6 @@ export default class MajorCard extends React.Component {
         return (
             <>
                 <Card>
-                    <CardHeader>
-                        <CardTitle tag="h5">Major ({majors.length})</CardTitle>
-                    </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Search name..." />
@@ -89,6 +86,7 @@ export default class MajorCard extends React.Component {
                                 }
                             </tbody>
                         </Table>
+                        <label className="float-right"><h6>Total: {majors.length}</h6></label>
                     </CardBody>
                 </Card>
             </>

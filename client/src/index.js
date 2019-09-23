@@ -66,7 +66,7 @@ export default function App() {
 
       if (res.data.screen !== undefined) {
         setScreen(res.data.screen)
-      }
+      } 
     } catch (e) {
       console.log(e)
     }
@@ -91,20 +91,20 @@ export default function App() {
     <div className="App">
       {screen === 'auth'
         ?
-        <Col className="ml-auto mr-auto" style={{paddingTop: "100px", width:"350px"}}>
+        <Col className="ml-auto mr-auto" style={{ paddingTop: "100px", width: "350px" }}>
           <Card>
-            admin - 123 or user - 456
-            <CardBody>
-              <label>Username: </label>
-              <br />
-              <Input type="text" onChange={e => setUsername(e.target.value)} />
-              <br />
-              <label>Password: </label>
-              <br />
-              <Input type="password" onChange={e => setPassword(e.target.value)} />
-              <br />
-              <Button onClick={auth}>Login</Button>
-            </CardBody>
+              admin - 123 or user - 456
+              <CardBody>
+                <label>Username: </label>
+                <br />
+                <Input type="text" onChange={e => setUsername(e.target.value)} />
+                <br />
+                <label>Password: </label>
+                <br />
+                <Input type="password" onChange={e => setPassword(e.target.value)} />
+                <br />
+                <Button onClick={auth}>Login</Button>
+              </CardBody>
           </Card>
         </Col>
         : <View screen={screen} setScreen={setScreen} />
