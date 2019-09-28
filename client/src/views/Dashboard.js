@@ -9,7 +9,6 @@ import {
     CardTitle,
     CardBody
 } from 'reactstrap'
-import Notification from '../components/Notification'
 
 export default class Dashboard extends React.Component {
     render() {

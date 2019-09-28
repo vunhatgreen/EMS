@@ -11,8 +11,7 @@ import {
     Input,
     Row,
     Col
-} from "reactstrap";
-import Notification from '../components/Notification';
+} from "reactstrap"
 
 export default class User extends React.Component {
     render() {
@@ -271,7 +270,6 @@ export default class User extends React.Component {
                                         </Row>
                                         <Row>
                                             <div className="update ml-auto mr-auto">
-                                                <Notification content="Your information has been updated">
                                                     <Button
                                                         className="btn-round"
                                                         color="primary"
@@ -279,7 +277,6 @@ export default class User extends React.Component {
                                                     >
                                                         Update Profile
                                                     </Button>
-                                                </Notification>
                                             </div>
                                         </Row>
                                     {/* </Form> */}

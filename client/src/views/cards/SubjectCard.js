@@ -15,6 +15,7 @@ import {
     CardBody
 } from 'reactstrap'
 import axios from 'axios'
+import NotificationAlert from 'react-notification-alert'
 
 export default class SubjectCard extends React.Component {
     state = {
@@ -27,13 +28,22 @@ export default class SubjectCard extends React.Component {
         parallel: "",
         subjects: []
     }
+    componentWillMount() {
+        this.getSubjects()
+    }
     getSubjects() {
         axios.get("/api/subjects").then(res =>
             this.setState({ subjects: res.data })
         )
     }
-    componentWillMount() {
-        this.getSubjects()
+    alert(type, message) {
+        this.refs.notify.notificationAlert({
+            place: 'br',
+            message: (<div>{message}</div>),
+            type: type,
+            icon: "nc-icon nc-bell-55",
+            autoDismiss: 3
+        })
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -56,17 +66,23 @@ export default class SubjectCard extends React.Component {
             credit: this.state.credit,
             prerequisite: this.state.prerequisite,
             parallel: this.state.parallel
+        }).then(res => {
+            this.alert(res.data.type, res.data.message)
         })
         this.getSubjects()
         this.toggleModal()
     }
     delete = e => {
-        axios.delete('/api/subjects/' + this.state.id)
+        axios.delete('/api/subjects/' + this.state.id).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getSubjects()
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/subjects/' + this.state.target_id, { id: this.state.id, name: this.state.name, credit: this.state.credit, prerequisite: this.state.prerequisite, parallel: this.state.parallel })
+        axios.put('/api/subjects/' + this.state.target_id, { id: this.state.id, name: this.state.name, credit: this.state.credit, prerequisite: this.state.prerequisite, parallel: this.state.parallel }).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getSubjects()
         this.toggleModal()
     }
@@ -78,6 +94,7 @@ export default class SubjectCard extends React.Component {
         return (
             <>
                 <Card>
+                    <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
@@ -90,11 +107,11 @@ export default class SubjectCard extends React.Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
-                                    <th width="20%">ID</th>
+                                    <th width="10%">ID</th>
                                     <th>Môn học</th>
-                                    <th>Số tín chỉ</th>
-                                    <th>Môn tiên quyết</th>
-                                    <th>Môn song hành</th>
+                                    <th width="10%">Số tín chỉ</th>
+                                    <th width="20%">Môn tiên quyết</th>
+                                    <th width="20%">Môn song hành</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,19 +148,19 @@ export default class SubjectCard extends React.Component {
                             <Input value={credit} onChange={this.change} name="credit" />
                             <Label>Môn tiên quyết</Label>
                             <Input type="select" value={prerequisite} onChange={this.change} name="prerequisite">
-                                <option value=''>Không có</option>
+                                <option></option>
                                 {
                                     subjects.map((subject) =>
-                                        <option value={subject.id}>{subject.name}</option>
+                                        <option value={subject.id}>{subject.name} ({subject.id})</option>
                                     )
                                 }
                             </Input>
                             <Label>Môn song hành</Label>
                             <Input type="select" value={parallel} onChange={this.change} name="parallel">
-                                <option value=''>Không có</option>
+                                <option></option>
                                 {
                                     subjects.map((subject) =>
-                                        <option value={subject.id}>{subject.name}</option>
+                                        <option value={subject.id}>{subject.name} ({subject.id})</option>
                                     )
                                 }
                             </Input>

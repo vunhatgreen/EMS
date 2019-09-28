@@ -15,6 +15,7 @@ import {
     CardBody
 } from 'reactstrap'
 import axios from 'axios'
+import NotificationAlert from 'react-notification-alert'
 
 export default class MajorCard extends React.Component {
     state = {
@@ -26,6 +27,19 @@ export default class MajorCard extends React.Component {
         majors: [],
         faculties: [],
     }
+    componentWillMount() {
+        this.getMajors()
+        this.getFaculties()
+    }
+    alert(type, message) {
+        this.refs.notify.notificationAlert({
+            place: 'br',
+            message: (<div>{message}</div>),
+            type: type,
+            icon: "nc-icon nc-bell-55",
+            autoDismiss: 3
+        })
+    }
     getMajors() {
         axios.get("/api/majors").then(res =>
             this.setState({ majors: res.data })
@@ -35,10 +49,6 @@ export default class MajorCard extends React.Component {
         axios.get("/api/faculties").then(res =>
             this.setState({ faculties: res.data })
         )
-    }
-    componentWillMount() {
-        this.getMajors()
-        this.getFaculties()
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -65,17 +75,23 @@ export default class MajorCard extends React.Component {
             id: this.state.id,
             name: this.state.name,
             faculty: this.state.faculty
+        }).then(res => {
+            this.alert(res.data.type, res.data.message)
         })
         this.getMajors()
         this.toggleModal()
     }
     delete = e => {
-        axios.delete('/api/majors/' + this.state.id)
+        axios.delete('/api/majors/' + this.state.id).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getMajors()
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/majors/' + this.state.target_id, { id: this.state.id, name: this.state.name, faculty: this.state.faculty })
+        axios.put('/api/majors/' + this.state.target_id, { id: this.state.id, name: this.state.name, faculty: this.state.faculty }).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getMajors()
         this.toggleModal()
     }
@@ -84,6 +100,7 @@ export default class MajorCard extends React.Component {
         return (
             <>
                 <Card>
+                    <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
@@ -133,7 +150,7 @@ export default class MajorCard extends React.Component {
                             <Input type="select" name="faculty" value={faculty} onChange={this.change}>
                                 {
                                     faculties.map((faculty) =>
-                                        <option value={faculty.id}>{faculty.name}</option>
+                                        <option value={faculty.id}>{faculty.name} ({faculty.id})</option>
                                     )
                                 }
                             </Input>

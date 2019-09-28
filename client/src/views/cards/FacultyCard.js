@@ -14,6 +14,7 @@ import {
     Card,
     CardBody
 } from 'reactstrap'
+import NotificationAlert from 'react-notification-alert'
 import axios from 'axios'
 
 export default class FacultyCard extends React.Component {
@@ -24,13 +25,17 @@ export default class FacultyCard extends React.Component {
         name: "",
         faculties: []
     }
-    getFaculties() {
-        axios.get("/api/faculties").then(res =>
-            this.setState({ faculties: res.data })
-        )
-    }
     componentWillMount() {
         this.getFaculties()
+    }
+    alert(type, message) {
+        this.refs.notify.notificationAlert({
+            place: 'br',
+            message: (<div>{message}</div>),
+            type: type,
+            icon: "nc-icon nc-bell-55",
+            autoDismiss: 3
+        })
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -46,26 +51,32 @@ export default class FacultyCard extends React.Component {
             modal: !prevState.modal
         }))
     }
+    getFaculties() {
+        axios.get("/api/faculties").then(res =>
+            this.setState({ faculties: res.data })
+        )
+    }
     add = e => {
         axios.post('/api/faculties', {
             id: this.state.id,
             name: this.state.name
-        }).then(response => {
-            console.log(response)
+        }).then(res => {
+            this.alert(res.data.type, res.data.message)
         })
-            .catch(error => {
-                console.log(error.response)
-            });
         this.getFaculties()
         this.toggleModal()
     }
     delete = e => {
-        axios.delete('/api/faculties/' + this.state.id)
+        axios.delete('/api/faculties/' + this.state.id).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getFaculties()
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/faculties/' + this.state.target_id, { id: this.state.id, name: this.state.name })
+        axios.put('/api/faculties/' + this.state.target_id, { id: this.state.id, name: this.state.name }).then(res => {
+            this.alert(res.data.type, res.data.message)
+        })
         this.getFaculties()
         this.toggleModal()
     }
@@ -77,6 +88,7 @@ export default class FacultyCard extends React.Component {
         return (
             <>
                 <Card>
+                    <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
