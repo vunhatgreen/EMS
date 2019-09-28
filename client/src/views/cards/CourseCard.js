@@ -1,15 +1,20 @@
 import React from 'react'
 import {
     Input,
+    Label,
+    Modal,
+    FormGroup,
+    ModalBody,
+    ModalFooter,
+    Button,
     Table,
     InputGroupAddon,
     InputGroup,
     InputGroupText,
     Card,
-    CardHeader,
-    CardBody,
-    CardTitle
+    CardBody
 } from 'reactstrap'
+import axios from 'axios'
 
 export default class CourseCard extends React.Component {
     state = {
@@ -33,6 +38,14 @@ export default class CourseCard extends React.Component {
             }
         ]
     }
+    getCourses() {
+        axios.get("/api/courses").then(res =>
+            this.setState({ course: res.data })
+        )
+    }
+    componentWillMount() {
+        this.getCourses()
+    }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -40,20 +53,33 @@ export default class CourseCard extends React.Component {
             });
         }
     }
+    toggleModal = course => {
+        if (course) this.setState({ id: course.id, name: course.name, target_id: course.id })
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }))
+    }
+    delete = e => {
+        axios.delete('/api/courses/' + this.state.id)
+        this.getCourses()
+        this.toggleModal()
+    }
+    edit = e => {
+        axios.put('/api/courses/' + this.state.target_id, {id: this.state.id, name:  this.state.name})
+        this.getcourse()
+        this.toggleModal()
+    }
     change = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { courses, filter } = this.state
+        const { id, name, courses, filter } = this.state
         return (
             <>
                 <Card>
-                    <CardHeader>
-                        <CardTitle tag="h5">Course ({courses.length})</CardTitle>
-                    </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Search name..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -85,6 +111,22 @@ export default class CourseCard extends React.Component {
                         </Table>
                     </CardBody>
                 </Card>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                    <ModalBody>
+                        <FormGroup>
+                            <Label>ID</Label>
+                            <Input value={id} onChange={this.change} name="id" />
+                            <Label>Name</Label>
+                            <Input value={name} onChange={this.change} name="name" />
+                        </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.edit} className="float-left"><i class="nc-icon nc-check-2" /> EDIT</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> CANCEL</Button> {' '}
+                        <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> DELETE</Button>
+                    </ModalFooter>
+                </Modal>
             </>
         )
     }

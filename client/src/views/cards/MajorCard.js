@@ -1,41 +1,44 @@
 import React from 'react'
 import {
     Input,
+    Label,
+    Modal,
+    FormGroup,
+    ModalBody,
+    ModalFooter,
+    Button,
     Table,
     InputGroupAddon,
     InputGroup,
     InputGroupText,
     Card,
-    CardHeader,
-    CardBody,
-    CardTitle
+    CardBody
 } from 'reactstrap'
+import axios from 'axios'
 
 export default class MajorCard extends React.Component {
     state = {
         filter: "",
-        majors: [
-            {
-                id: 1,
-                name: "Computer Science",
-                faculty: "CSE"
-            },
-            {
-                id: 2,
-                name: "Information Technology",
-                faculty: "CSE"
-            },
-            {
-                id: 3,
-                name: "Computer Engineering",
-                faculty: "CSE"
-            },
-            {
-                id: 4,
-                name: "Data Analysis",
-                faculty: "CSE"
-            }
-        ]
+        target_id: "",
+        id: "",
+        name: "",
+        faculty: "",
+        majors: [],
+        faculties: [],
+    }
+    getMajors() {
+        axios.get("/api/majors").then(res =>
+            this.setState({ majors: res.data })
+        )
+    }
+    getFaculties() {
+        axios.get("/api/faculties").then(res =>
+            this.setState({ faculties: res.data })
+        )
+    }
+    componentWillMount() {
+        this.getMajors()
+        this.getFaculties()
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -47,14 +50,43 @@ export default class MajorCard extends React.Component {
     change = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
+
+    toggleModal = major => {
+        this.getFaculties()
+        if (major) this.setState({ id: major.id, name: major.name, faculty: major.faculty, target_id: major.id })
+        else this.setState({ target_id: "" })
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }))
+    }
+    add = e => {
+
+        axios.post('/api/majors', {
+            id: this.state.id,
+            name: this.state.name,
+            faculty: this.state.faculty
+        })
+        this.getMajors()
+        this.toggleModal()
+    }
+    delete = e => {
+        axios.delete('/api/majors/' + this.state.id)
+        this.getMajors()
+        this.toggleModal()
+    }
+    edit = e => {
+        axios.put('/api/majors/' + this.state.target_id, { id: this.state.id, name: this.state.name, faculty: this.state.faculty })
+        this.getMajors()
+        this.toggleModal()
+    }
     render() {
-        const { majors, filter } = this.state
+        const { majors, faculties, filter, id, name, faculty, target_id } = this.state
         return (
             <>
                 <Card>
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Search name..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -63,10 +95,10 @@ export default class MajorCard extends React.Component {
                         </InputGroup>
                         <Table hover>
                             <thead className="text-primary">
-                                <tr>
+                                <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
                                     <th width="20%">ID</th>
-                                    <th>Major</th>
-                                    <th>Faculty</th>
+                                    <th>Ngành</th>
+                                    <th>Khoa</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,7 +107,7 @@ export default class MajorCard extends React.Component {
                                         <>
                                             {
                                                 major.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr style={{cursor: "pointer"}}>
+                                                <tr onClick={() => this.toggleModal(major)} style={{ cursor: "pointer" }}>
                                                     <td>{major.id}</td>
                                                     <td>{major.name}</td>
                                                     <td>{major.faculty}</td>
@@ -86,9 +118,34 @@ export default class MajorCard extends React.Component {
                                 }
                             </tbody>
                         </Table>
-                        <label className="float-right"><h6>Total: {majors.length}</h6></label>
+                        <label className="float-right"><h6>Tổng cộng: {majors.length}</h6></label>
                     </CardBody>
                 </Card>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                    <ModalBody>
+                        <FormGroup>
+                            <Label>ID</Label>
+                            <Input value={id} onChange={this.change} name="id" />
+                            <Label>Tên</Label>
+                            <Input value={name} onChange={this.change} name="name" />
+                            <Label>Khoa</Label>
+                            <Input type="select" name="faculty" value={faculty} onChange={this.change}>
+                                {
+                                    faculties.map((faculty) =>
+                                        <option value={faculty.id}>{faculty.name}</option>
+                                    )
+                                }
+                            </Input>
+                        </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                        {target_id == "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> THÊM</Button>} {' '}
+                        {target_id != "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> SỬA</Button>} {' '}
+                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> HỦY</Button> {' '}
+                        {target_id != "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> XÓA</Button>}
+                    </ModalFooter>
+                </Modal>
             </>
         )
     }

@@ -8,14 +8,14 @@ import Bulletin from "./views/Bulletin.js"
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Bảng tin",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin"
   },
   {
     path: "/bulletin",
-    name: "Bulletin",
+    name: "Thông báo",
     icon: "nc-icon nc-bullet-list-67",
     component: Bulletin,
     layout: "/admin"
@@ -36,21 +36,21 @@ var routes = [
   // },
   {
     path: "/management",
-    name: "Management",
+    name: "Quản lý",
     icon: "nc-icon nc-tile-56",
     component: Management,
     layout: "/admin"
   },
   {
     path: "/user-page",
-    name: "User Profile",
+    name: "Hồ sơ cá nhân",
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/admin"
   },
   {
     path: "/configuration",
-    name: "Configuration",
+    name: "Thiết lập",
     icon: "nc-icon nc-settings",
     component: Configuration,
     layout: "/admin"

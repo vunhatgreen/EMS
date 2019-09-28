@@ -13,6 +13,7 @@ import FacultyCard from './cards/FacultyCard';
 import MajorCard from './cards/MajorCard';
 import CourseCard from './cards/CourseCard'
 import UserCard from './cards/UserCard'
+import SubjectCard from './cards/SubjectCard';
 
 export default class Tables extends React.Component {
     state = {
@@ -40,42 +41,42 @@ export default class Tables extends React.Component {
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
-                        > Faculty
+                        > Khoa
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
-                        > Major
+                        > Ngành
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}
-                        > Subject
+                        > Môn học
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '4' })}
                             onClick={() => { this.toggle('4'); }}
-                        > Program
+                        > Chương trình
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '5' })}
                             onClick={() => { this.toggle('5'); }}
-                        > Course
+                        > Khóa học
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '6' })}
                             onClick={() => { this.toggle('6'); }}
-                        > User
+                        > Tài khoản
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -97,7 +98,7 @@ export default class Tables extends React.Component {
                     <TabPane tabId="3">
                         <Row>
                             <Col>
-
+                                <SubjectCard />
                             </Col>
                         </Row>
                     </TabPane>

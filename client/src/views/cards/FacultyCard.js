@@ -4,7 +4,6 @@ import {
     Label,
     Modal,
     FormGroup,
-    ModalHeader,
     ModalBody,
     ModalFooter,
     Button,
@@ -13,16 +12,14 @@ import {
     InputGroup,
     InputGroupText,
     Card,
-    CardHeader,
-    CardBody,
-    CardTitle
+    CardBody
 } from 'reactstrap'
 import axios from 'axios'
-import Notification from '../../components/Notification'
 
 export default class FacultyCard extends React.Component {
     state = {
         filter: "",
+        target_id: "",
         id: "",
         name: "",
         faculties: []
@@ -43,28 +40,46 @@ export default class FacultyCard extends React.Component {
         }
     }
     toggleModal = faculty => {
-        if (faculty) this.setState({ id: faculty.id, name: faculty.name })
+        if (faculty) this.setState({ id: faculty.id, name: faculty.name, target_id: faculty.id })
+        else this.setState({ target_id: "" })
         this.setState(prevState => ({
             modal: !prevState.modal
         }))
+    }
+    add = e => {
+        axios.post('/api/faculties', {
+            id: this.state.id,
+            name: this.state.name
+        }).then(response => {
+            console.log(response)
+        })
+            .catch(error => {
+                console.log(error.response)
+            });
+        this.getFaculties()
+        this.toggleModal()
     }
     delete = e => {
         axios.delete('/api/faculties/' + this.state.id)
         this.getFaculties()
         this.toggleModal()
     }
-
+    edit = e => {
+        axios.put('/api/faculties/' + this.state.target_id, { id: this.state.id, name: this.state.name })
+        this.getFaculties()
+        this.toggleModal()
+    }
     change = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { faculties, filter, id, name } = this.state
+        const { faculties, filter, id, name, target_id } = this.state
         return (
             <>
                 <Card>
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Search name..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -73,9 +88,9 @@ export default class FacultyCard extends React.Component {
                         </InputGroup>
                         <Table hover>
                             <thead className="text-primary">
-                                <tr>
+                                <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
                                     <th width="20%">ID</th>
-                                    <th>Faculty</th>
+                                    <th>Khoa</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,7 +109,7 @@ export default class FacultyCard extends React.Component {
                                 }
                             </tbody>
                         </Table>
-                        <label className="float-right"><h6>Total: {faculties.length}</h6></label>
+                        <label className="float-right"><h6>Tổng cộng: {faculties.length}</h6></label>
                     </CardBody>
                 </Card>
 
@@ -103,14 +118,15 @@ export default class FacultyCard extends React.Component {
                         <FormGroup>
                             <Label>ID</Label>
                             <Input value={id} onChange={this.change} name="id" />
-                            <Label>Name</Label>
+                            <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggleModal} className="float-left"><i class="nc-icon nc-check-2" /> EDIT</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> CANCEL</Button> {' '}
-                        <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> DELETE</Button>
+                        {target_id === "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> THÊM</Button>} {' '}
+                        {target_id !== "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> SỬA</Button>} {' '}
+                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> HỦY</Button> {' '}
+                        {target_id !== "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> XÓA</Button>}
                     </ModalFooter>
                 </Modal>
 

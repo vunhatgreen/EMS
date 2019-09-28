@@ -10,8 +10,10 @@ require('mongoose').connect('mongodb://localhost/ems', { useCreateIndex: true, u
 //For authentication
 const auth = basicAuth({
     users: {
-        admin: '123',
-        user: '456'
+        admin: 'admin',
+        user: '123',
+        thanh: '123',
+        ['thanha']: '32'
     },
 });
 app.use(cookieParser('82e4e438a0705fabf61f9854e3b575af'))
@@ -25,7 +27,7 @@ app.get('/authenticate', auth, (req, res) => {
 
     if (req.auth.user === 'admin') {
         res.cookie('name', 'admin', options).send({ screen: 'admin' });
-    } else if (req.auth.user === 'user') {
+    } else if (req.auth.user !== 'admin') {
         res.cookie('name', 'user', options).send({ screen: 'user' });
     }
 });
@@ -54,10 +56,13 @@ app.get('/get-data', (req, res) => {
     }
 });
 
-
-
-
-
+ 
+//Handle error
+app.use((err, req, res, next) => {
+    console.log(err)
+    res.send(err)
+    next(err)
+});
 //For admin api
 const cFaculty = require('./controllers/faculty')
 app.route('/api/faculties')
@@ -67,3 +72,30 @@ app.route('/api/faculties/:id')
     .get(cFaculty.getOne)
     .put(cFaculty.update)
     .delete(cFaculty.delete)
+
+const cMajor = require('./controllers/major')
+app.route('/api/majors')
+    .get(cMajor.getAll)
+    .post(cMajor.create)
+app.route('/api/majors/:id')
+    .get(cMajor.getOne)
+    .put(cMajor.update)
+    .delete(cMajor.delete)
+
+const cSubject = require('./controllers/subject')
+app.route('/api/subjects')
+    .get(cSubject.getAll)
+    .post(cSubject.create)
+app.route('/api/subjects/:id')
+    .get(cSubject.getOne)
+    .put(cSubject.update)
+    .delete(cSubject.delete)
+
+const cUser = require('./controllers/user')
+app.route('/api/users')
+    .get(cUser.getAll)
+    .post(cUser.create)
+app.route('/api/users/:id')
+    .get(cUser.getOne)
+    .put(cUser.update)
+    .delete(cUser.delete)

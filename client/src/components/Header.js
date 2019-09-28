@@ -89,7 +89,9 @@ export default class Header extends React.Component {
   }
   clearCookie() {
     axios.get('/clear-cookie')
-    window.location.reload()
+    setTimeout(function() {
+      window.location.reload()
+    }, 100)
   }
   render() {
     return (
@@ -171,7 +173,7 @@ export default class Header extends React.Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <Link className="nav-link btn-rotate" onClick={this.clearCookie}>
+                <Link to="#" className="nav-link btn-rotate" onClick={this.clearCookie}>
                   <i className="nc-icon nc-button-power" />
                   <p>
                     <span className="d-lg-none d-md-block">Log out</span>

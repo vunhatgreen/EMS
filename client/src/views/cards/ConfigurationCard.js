@@ -31,13 +31,13 @@ export default class ConfigurationCard extends React.Component {
                         <Row>
                             <Col md="3">
                                 <FormGroup>
-                                    <Label>School name</Label>
+                                    <Label>Tên trường</Label>
                                     <Input></Input>
                                 </FormGroup>
                             </Col>
                             <Col md="5">
                                 <FormGroup>
-                                    <Label>Logo</Label>
+                                    <Label>Biểu tượng</Label>
                                     <Input></Input>
                                 </FormGroup>
                             </Col>
