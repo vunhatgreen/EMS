@@ -97,7 +97,7 @@ export default class SubjectCard extends Component {
                     <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -107,7 +107,7 @@ export default class SubjectCard extends Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
-                                    <th width="10%">ID</th>
+                                    <th width="10%">Mã</th>
                                     <th>Môn học</th>
                                     <th width="10%">Số tín chỉ</th>
                                     <th width="20%">Môn tiên quyết</th>
@@ -119,7 +119,8 @@ export default class SubjectCard extends Component {
                                     subjects.map((subject) =>
                                         <>
                                             {
-                                                subject.name.toLowerCase().includes(filter.toLowerCase()) &&
+                                                (subject.id.includes(filter) || subject.name.toLowerCase().includes(filter.toLowerCase()))
+                                                &&
                                                 <tr onClick={() => this.toggleModal(subject)} style={{ cursor: "pointer" }}>
                                                     <td>{subject.id}</td>
                                                     <td>{subject.name}</td>
@@ -140,7 +141,7 @@ export default class SubjectCard extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalBody>
                         <FormGroup>
-                            <Label>ID</Label>
+                            <Label>Mã</Label>
                             <Input value={id} onChange={this.change} name="id" />
                             <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />

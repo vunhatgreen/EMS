@@ -11,25 +11,29 @@ import {
     CardTitle
 } from 'reactstrap'
 
-export default class UserCard extends Component {
+export default class MemberCard extends Component {
     state = {
         filter: "",
-        users: [
+        members: [
             {
-                id: 1,
-                name: "Computer Science"
+                username: "admin",
+                name: "admin",
+                role: "Admin"
             },
             {
-                id: 2,
-                name: "Information Technology"
+                username: "abc123",
+                name: "Information Technology",
+                role: "Giáo viên"
             },
             {
-                id: 3,
-                name: "Computer Engineering"
+                username: "bcd352",
+                name: "Computer Engineering",
+                role: "Sinh viên"
             },
             {
-                id: 4,
-                name: "Data Analysis"
+                username: "sdfe4324",
+                name: "Data Analysis",
+                role: "Sinh viên"
             }
         ]
     }
@@ -44,16 +48,13 @@ export default class UserCard extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { users, filter } = this.state
+        const { members, filter } = this.state
         return (
             <>
                 <Card>
-                    <CardHeader>
-                        <CardTitle tag="h5">User ({users.length})</CardTitle>
-                    </CardHeader>
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -63,19 +64,21 @@ export default class UserCard extends Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr>
-                                    <th width="20%">ID</th>
-                                    <th>User</th>
+                                    <th width="10%">Tài khoản</th>
+                                    <th>Họ và tên</th>
+                                    <th>Vai trò</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    users.map((user) =>
+                                    members.map((member) =>
                                         <>
                                             {
-                                                user.name.toLowerCase().includes(filter.toLowerCase()) &&
+                                                member.name.toLowerCase().includes(filter.toLowerCase()) &&
                                                 <tr style={{cursor: "pointer"}}>
-                                                    <td>{user.id}</td>
-                                                    <td>{user.name}</td>
+                                                    <td>{member.username}</td>
+                                                    <td>{member.name}</td>
+                                                    <td>{member.role}</td>
                                                 </tr>
                                             }
                                         </>

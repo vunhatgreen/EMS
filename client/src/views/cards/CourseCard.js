@@ -79,7 +79,7 @@ export default class CourseCard extends Component {
                 <Card>
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />

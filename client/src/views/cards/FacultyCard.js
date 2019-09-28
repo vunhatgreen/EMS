@@ -91,7 +91,7 @@ export default class FacultyCard extends Component {
                     <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -101,7 +101,7 @@ export default class FacultyCard extends Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
-                                    <th width="20%">ID</th>
+                                    <th width="20%">Mã</th>
                                     <th>Khoa</th>
                                 </tr>
                             </thead>
@@ -110,7 +110,8 @@ export default class FacultyCard extends Component {
                                     faculties.map((faculty) =>
                                         <>
                                             {
-                                                faculty.name.toLowerCase().includes(filter.toLowerCase()) &&
+                                                (faculty.id.includes(filter) || faculty.name.toLowerCase().includes(filter.toLowerCase()))
+                                                &&
                                                 <tr onClick={() => this.toggleModal(faculty)} style={{ cursor: "pointer" }}>
                                                     <td>{faculty.id}</td>
                                                     <td>{faculty.name}</td>
@@ -128,7 +129,7 @@ export default class FacultyCard extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalBody>
                         <FormGroup>
-                            <Label>ID</Label>
+                            <Label>Mã</Label>
                             <Input value={id} onChange={this.change} name="id" />
                             <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />

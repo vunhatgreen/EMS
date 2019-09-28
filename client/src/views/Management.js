@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classnames from 'classnames';
+import classnames from 'classnames'
 import {
     Nav,
     NavItem,
@@ -9,11 +9,11 @@ import {
     Row,
     Col
 } from 'reactstrap'
-import FacultyCard from './cards/FacultyCard';
-import MajorCard from './cards/MajorCard';
+import FacultyCard from './cards/FacultyCard'
+import MajorCard from './cards/MajorCard'
 import CourseCard from './cards/CourseCard'
-import UserCard from './cards/UserCard'
-import SubjectCard from './cards/SubjectCard';
+import MemberCard from './cards/MemberCard'
+import SubjectCard from './cards/SubjectCard'
 
 export default class Tables extends Component {
     state = {
@@ -76,7 +76,7 @@ export default class Tables extends Component {
                         <NavLink style={{ cursor: "pointer" }}
                             className={classnames({ active: this.state.activeTab === '6' })}
                             onClick={() => { this.toggle('6'); }}
-                        > Tài khoản
+                        > Thành viên
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -119,7 +119,7 @@ export default class Tables extends Component {
                     <TabPane tabId="6">
                         <Row>
                             <Col>
-                                <UserCard />
+                                <MemberCard />
                             </Col>
                         </Row>
                     </TabPane>

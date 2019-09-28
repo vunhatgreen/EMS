@@ -103,7 +103,7 @@ export default class MajorCard extends Component {
                     <NotificationAlert ref="notify" />
                     <CardBody>
                         <InputGroup className="no-border">
-                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo tên..." />
+                            <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i className="nc-icon nc-zoom-split" />
@@ -113,7 +113,7 @@ export default class MajorCard extends Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
-                                    <th width="20%">ID</th>
+                                    <th width="20%">Mã</th>
                                     <th>Ngành</th>
                                     <th>Khoa</th>
                                 </tr>
@@ -123,7 +123,8 @@ export default class MajorCard extends Component {
                                     majors.map((major) =>
                                         <>
                                             {
-                                                major.name.toLowerCase().includes(filter.toLowerCase()) &&
+                                                (major.id.includes(filter) || major.name.toLowerCase().includes(filter.toLowerCase()))
+                                                &&
                                                 <tr onClick={() => this.toggleModal(major)} style={{ cursor: "pointer" }}>
                                                     <td>{major.id}</td>
                                                     <td>{major.name}</td>
@@ -142,7 +143,7 @@ export default class MajorCard extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalBody>
                         <FormGroup>
-                            <Label>ID</Label>
+                            <Label>Mã</Label>
                             <Input value={id} onChange={this.change} name="id" />
                             <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />
