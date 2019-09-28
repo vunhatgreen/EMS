@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     Input,
     Label,
@@ -16,7 +16,7 @@ import {
 } from 'reactstrap'
 import axios from 'axios'
 
-export default class CourseCard extends React.Component {
+export default class CourseCard extends Component {
     state = {
         filter: "",
         courses: [
@@ -65,7 +65,7 @@ export default class CourseCard extends React.Component {
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/courses/' + this.state.target_id, {id: this.state.id, name:  this.state.name})
+        axios.put('/api/courses/' + this.state.target_id, { id: this.state.id, name: this.state.name })
         this.getcourse()
         this.toggleModal()
     }
@@ -99,7 +99,7 @@ export default class CourseCard extends React.Component {
                                         <>
                                             {
                                                 course.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr style={{cursor: "pointer"}}>
+                                                <tr style={{ cursor: "pointer" }}>
                                                     <td>{course.id}</td>
                                                     <td>{course.name}</td>
                                                 </tr>

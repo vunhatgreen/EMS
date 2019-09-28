@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
-    Alert,
     Row,
     Col,
     Badge,
@@ -10,7 +9,7 @@ import {
     CardBody
 } from 'reactstrap'
 
-export default class Bulletin extends React.Component {
+export default class Bulletin extends Component {
     render() {
         return (
             <>

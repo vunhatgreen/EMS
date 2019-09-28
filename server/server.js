@@ -64,6 +64,15 @@ app.use((err, req, res, next) => {
     next(err)
 });
 //For admin api
+const cAnnouncement = require('./controllers/announcement')
+app.route('/api/announcements')
+    .get(cAnnouncement.getAll)
+    .post(cAnnouncement.create)
+app.route('/api/announcements/:id')
+    .get(cAnnouncement.getOne)
+    .put(cAnnouncement.update)
+    .delete(cAnnouncement.delete)
+
 const cFaculty = require('./controllers/faculty')
 app.route('/api/faculties')
     .get(cFaculty.getAll)

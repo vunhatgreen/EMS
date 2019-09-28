@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ConfigurationCard from './cards/ConfigurationCard'
 
-export default class Configuration extends React.Component {
+export default class Configuration extends Component {
     render() {
         return (
             <div>

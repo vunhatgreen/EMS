@@ -1,20 +1,10 @@
-import React from 'react'
-import {
-    Alert,
-    Row,
-    Col,
-    Badge,
-    Card,
-    CardHeader,
-    CardTitle,
-    CardBody
-} from 'reactstrap'
+import React, { Component } from 'react'
 
-export default class Dashboard extends React.Component {
+export default class Dashboard extends Component {
     render() {
         return (
             <>
-               
+
             </>
         )
     }

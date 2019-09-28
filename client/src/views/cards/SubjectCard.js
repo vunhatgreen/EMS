@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     Input,
     Label,
@@ -17,7 +17,7 @@ import {
 import axios from 'axios'
 import NotificationAlert from 'react-notification-alert'
 
-export default class SubjectCard extends React.Component {
+export default class SubjectCard extends Component {
     state = {
         filter: "",
         target_id: "",

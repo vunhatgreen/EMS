@@ -107,15 +107,15 @@ export default function App() {
           <Card>
             admin - admin or user - 123
               <CardBody>
-              <label>Username: </label>
+              <label>Tên tài khoản: </label>
               <br />
               <Input type="text" onChange={e => setUsername(e.target.value)} />
               <br />
-              <label>Password: </label>
+              <label>Mật khẩu: </label>
               <br />
               <Input type="password" onChange={e => setPassword(e.target.value)} />
               <br />
-              <Button onClick={auth}>Login</Button>
+              <Button onClick={auth}>Đăng nhập</Button>
             </CardBody>
           </Card>
         </Col>

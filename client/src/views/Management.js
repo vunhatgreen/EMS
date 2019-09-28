@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import classnames from 'classnames';
 import {
     Nav,
@@ -15,7 +15,7 @@ import CourseCard from './cards/CourseCard'
 import UserCard from './cards/UserCard'
 import SubjectCard from './cards/SubjectCard';
 
-export default class Tables extends React.Component {
+export default class Tables extends Component {
     state = {
         activeTab: '1',
     }

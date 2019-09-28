@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     Input,
     Table,
@@ -11,7 +11,7 @@ import {
     CardTitle
 } from 'reactstrap'
 
-export default class UserCard extends React.Component {
+export default class UserCard extends Component {
     state = {
         filter: "",
         users: [

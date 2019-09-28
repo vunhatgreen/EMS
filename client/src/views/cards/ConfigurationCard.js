@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     Input,
     Table,
@@ -15,7 +15,7 @@ import {
     CardTitle
 } from 'reactstrap'
 
-export default class ConfigurationCard extends React.Component {
+export default class ConfigurationCard extends Component {
     state = {
 
     }
