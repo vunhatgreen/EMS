@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history"
 import { Router, Route, Switch, Redirect } from "react-router-dom"
-import { Col, Button, Input } from 'reactstrap'
-import { Box, BoxBody } from "./library/kapi"
+import { Col, Button, Input, Form } from 'reactstrap'
+import { Box, BoxBody, BoxHeader } from "./library/kapi"
 import "bootstrap/dist/css/bootstrap.css"
 import "./assets/scss/paper-dashboard.scss?v=1.1.0"
 import "perfect-scrollbar/css/perfect-scrollbar.css"
@@ -68,7 +68,8 @@ export default function App() {
   const [screen, setScreen] = useState('auth')
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-  const auth = async () => {
+  const auth = async (e) => {
+    e.preventDefault()
     try {
       const res = await axios.get('/authenticate', { auth: { username, password } })
 
@@ -101,17 +102,21 @@ export default function App() {
         ?
         <Col className="ml-auto mr-auto" style={{ paddingTop: "100px", width: "400px" }}>
           <Box>
-            admin - admin or user - 123
-              <BoxBody>
-              <label>Tên tài khoản: </label>
-              <br />
-              <Input type="text" onChange={e => setUsername(e.target.value)} />
-              <br />
-              <label>Mật khẩu: </label>
-              <br />
-              <Input type="password" onChange={e => setPassword(e.target.value)} />
-              <br />
-              <Button onClick={auth}>Đăng nhập</Button>
+            <BoxHeader>
+              admin - admin or user - 123
+            </BoxHeader>
+            <BoxBody>
+              <Form onSubmit={e => auth(e)}>
+                <label>Tên tài khoản: </label>
+                <br />
+                <Input type="text" onChange={e => setUsername(e.target.value)} />
+                <br />
+                <label>Mật khẩu: </label>
+                <br />
+                <Input type="password" onChange={e => setPassword(e.target.value)} />
+                <br />
+                <Button type="submit" block color="primary">Đăng nhập</Button>
+              </Form>
             </BoxBody>
           </Box>
         </Col>
