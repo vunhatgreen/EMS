@@ -9,11 +9,11 @@ import {
     Row,
     Col
 } from 'reactstrap'
-import FacultyCard from './cards/FacultyCard'
-import MajorCard from './cards/MajorCard'
-import CourseCard from './cards/CourseCard'
-import MemberCard from './cards/MemberCard'
-import SubjectCard from './cards/SubjectCard'
+import FacultyBox from './boxes/FacultyBox'
+import MajorBox from './boxes/MajorBox'
+import CourseBox from './boxes/CourseBox'
+import MemberBox from './boxes/MemberBox'
+import SubjectBox from './boxes/SubjectBox'
 
 export default class Tables extends Component {
     state = {
@@ -84,21 +84,21 @@ export default class Tables extends Component {
                     <TabPane tabId="1">
                         <Row>
                             <Col>
-                                <FacultyCard />
+                                <FacultyBox />
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="2">
                         <Row>
                             <Col>
-                                <MajorCard />
+                                <MajorBox />
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="3">
                         <Row>
                             <Col>
-                                <SubjectCard />
+                                <SubjectBox />
                             </Col>
                         </Row>
                     </TabPane>
@@ -112,14 +112,14 @@ export default class Tables extends Component {
                     <TabPane tabId="5">
                         <Row>
                             <Col>
-                                <CourseCard />
+                                <CourseBox />
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="6">
                         <Row>
                             <Col>
-                                <MemberCard />
+                                <MemberBox />
                             </Col>
                         </Row>
                     </TabPane>

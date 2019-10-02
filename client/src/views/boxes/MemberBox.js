@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
-import {
-    Input,
-    Table,
-    InputGroupAddon,
-    InputGroup,
-    InputGroupText,
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle
-} from 'reactstrap'
+import { Input, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
+import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
 
-export default class MemberCard extends Component {
+export default class MemberBox extends Component {
     state = {
         filter: "",
         members: [
@@ -51,8 +42,8 @@ export default class MemberCard extends Component {
         const { members, filter } = this.state
         return (
             <>
-                <Card>
-                    <CardBody>
+                <Box>
+                    <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
@@ -75,7 +66,7 @@ export default class MemberCard extends Component {
                                         <>
                                             {
                                                 member.name.toLowerCase().includes(filter.toLowerCase()) &&
-                                                <tr style={{cursor: "pointer"}}>
+                                                <tr style={{ cursor: "pointer" }}>
                                                     <td>{member.username}</td>
                                                     <td>{member.name}</td>
                                                     <td>{member.role}</td>
@@ -86,8 +77,11 @@ export default class MemberCard extends Component {
                                 }
                             </tbody>
                         </Table>
-                    </CardBody>
-                </Card>
+                        <BoxFooter>
+                            <label className="float-right"><h6>Tổng cộng: {members.length}</h6></label>
+                        </BoxFooter>
+                    </BoxBody>
+                </Box>
             </>
         )
     }

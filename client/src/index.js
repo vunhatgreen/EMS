@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history"
 import { Router, Route, Switch, Redirect } from "react-router-dom"
-import {
-  Col,
-  Button,
-  Input,
-  Card,
-  CardBody
-} from 'reactstrap'
+import { Col, Button, Input } from 'reactstrap'
+import { Box, BoxBody } from "./LibComponent/kapi"
 import "bootstrap/dist/css/bootstrap.css"
 import "./assets/scss/paper-dashboard.scss?v=1.1.0"
 import "perfect-scrollbar/css/perfect-scrollbar.css"
+import "./LibComponent/kapi.css"
 
 import AdminLayout from "./layouts/Admin"
 import axios from 'axios'
@@ -103,10 +99,10 @@ export default function App() {
     <div className="App">
       {screen === 'auth'
         ?
-        <Col className="ml-auto mr-auto" style={{ paddingTop: "100px", width: "350px" }}>
-          <Card>
+        <Col className="ml-auto mr-auto" style={{ paddingTop: "100px", width: "400px" }}>
+          <Box>
             admin - admin or user - 123
-              <CardBody>
+              <BoxBody>
               <label>Tên tài khoản: </label>
               <br />
               <Input type="text" onChange={e => setUsername(e.target.value)} />
@@ -116,8 +112,8 @@ export default function App() {
               <Input type="password" onChange={e => setPassword(e.target.value)} />
               <br />
               <Button onClick={auth}>Đăng nhập</Button>
-            </CardBody>
-          </Card>
+            </BoxBody>
+          </Box>
         </Col>
         : <View screen={screen} setScreen={setScreen} />
       }

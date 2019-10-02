@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
-import {
-    Input,
-    Button,
-    Label,
-    Row,
-    Col,
-    FormGroup,
-    Card,
-    CardBody,
-} from 'reactstrap'
+import { Input, Button, Label, Row, Col, FormGroup } from 'reactstrap'
+import { Box, BoxHeader, BoxBody, BoxTitle } from '../../LibComponent/kapi'
 
-export default class CurrencyCard extends Component {
+export default class CurrencyBox extends Component {
     state = {
         use: "",
         exchange: "",
@@ -25,8 +17,11 @@ export default class CurrencyCard extends Component {
         const { use, exchange, rate, cost, lock } = this.state
         return (
             <>
-                <Card>
-                    <CardBody>
+                <Box>
+                    <BoxHeader>
+                        <BoxTitle>ĐƠN VỊ TÀI CHÍNH</BoxTitle>
+                    </BoxHeader>
+                    <BoxBody>
                         <Row>
                             <Col>
                                 <FormGroup>
@@ -51,13 +46,13 @@ export default class CurrencyCard extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Tỉ giá</Label>
-                                    <Input disabled={lock} value={rate} name="rate" onChange={this.change}/>
+                                    <Input disabled={lock} value={rate} name="rate" onChange={this.change} />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label>Tương ứng</Label>
-                                    <Input readOnly value={1+" "+use+" = "+rate+ " "+exchange}>
+                                    <Input readOnly value={1 + " " + use + " = " + rate + " " + exchange}>
                                     </Input>
                                 </FormGroup>
                             </Col>
@@ -66,20 +61,20 @@ export default class CurrencyCard extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Giá trị tín chỉ</Label>
-                                    <Input disabled={lock} value={cost} name="cost" onChange={this.change}/>
+                                    <Input disabled={lock} value={cost} name="cost" onChange={this.change} />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label>Tương ứng</Label>
-                                    <Input readOnly value={cost+" "+use+" / 1 tín chỉ"}>
+                                    <Input readOnly value={cost + " " + use + " / 1 tín chỉ"}>
                                     </Input>
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Button className="float-right" onClick={()=>this.setState({lock : !this.state.lock})} color="primary">{lock ? 'Thay đổi' : 'Lưu thiết lập'}</Button>
-                    </CardBody>
-                </Card>
+                        <Button onClick={() => this.setState({ lock: !this.state.lock })} color="primary"><i className={lock ? 'nc-icon nc-refresh-69' : 'nc-icon nc-check-2'} />{lock ? ' Thay đổi' : ' Lưu'}</Button>
+                    </BoxBody>
+                </Box>
             </>
         )
     }

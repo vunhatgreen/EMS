@@ -1,22 +1,10 @@
 import React, { Component } from 'react'
 import {
-    Input,
-    Label,
-    Modal,
-    FormGroup,
-    ModalBody,
-    ModalFooter,
-    Button,
-    Table,
-    InputGroupAddon,
-    InputGroup,
-    InputGroupText,
-    Card,
-    CardBody
-} from 'reactstrap'
+    Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText} from 'reactstrap'
+import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
 import axios from 'axios'
 
-export default class CourseCard extends Component {
+export default class CourseBox extends Component {
     state = {
         filter: "",
         courses: [
@@ -76,8 +64,8 @@ export default class CourseCard extends Component {
         const { id, name, courses, filter } = this.state
         return (
             <>
-                <Card>
-                    <CardBody>
+                <Box>
+                    <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
@@ -89,8 +77,8 @@ export default class CourseCard extends Component {
                         <Table hover>
                             <thead className="text-primary">
                                 <tr>
-                                    <th width="20%">ID</th>
-                                    <th>Course</th>
+                                    <th width="20%">Mã</th>
+                                    <th>Khóa học</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,8 +97,11 @@ export default class CourseCard extends Component {
                                 }
                             </tbody>
                         </Table>
-                    </CardBody>
-                </Card>
+                        <BoxFooter>
+                            <label className="float-right"><h6>Tổng cộng: {courses.length}</h6></label>
+                        </BoxFooter>
+                    </BoxBody>
+                </Box>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalBody>

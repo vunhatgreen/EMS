@@ -1,10 +1,5 @@
 import React from 'react'
-import routes from "../routes.js"
-import {
-  Button,
-  Card,
-  CardBody
-} from 'reactstrap'
+import { Card, CardBody } from 'reactstrap'
 import Footer from '../components/Footer'
 import PerfectScrollbar from 'perfect-scrollbar'
 import MenuButton from '../components/MenuButton.js'

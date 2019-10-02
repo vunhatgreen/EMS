@@ -3,7 +3,7 @@ import {
     Row,
     Col
 } from 'reactstrap'
-import CurrencyCard from './cards/CurrencyCard'
+import CurrencyBox from './boxes/CurrencyBox'
 
 export default class Finance extends Component {
     render() {
@@ -11,7 +11,7 @@ export default class Finance extends Component {
             <div>
                 <Row>
                     <Col md="5">
-                        <CurrencyCard />
+                        <CurrencyBox />
                     </Col>
                 </Row>
             </div>

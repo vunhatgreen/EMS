@@ -1,23 +1,10 @@
 import React, { Component } from 'react'
-import {
-    Input,
-    Label,
-    Modal,
-    FormGroup,
-    ModalBody,
-    ModalFooter,
-    Button,
-    Table,
-    InputGroupAddon,
-    InputGroup,
-    InputGroupText,
-    Card,
-    CardBody
-} from 'reactstrap'
+import { Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
+import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
 import axios from 'axios'
 import NotificationAlert from 'react-notification-alert'
 
-export default class SubjectCard extends Component {
+export default class SubjectBox extends Component {
     state = {
         filter: "",
         target_id: "",
@@ -93,9 +80,9 @@ export default class SubjectCard extends Component {
         const { subjects, filter, id, name, credit, prerequisite, parallel, target_id } = this.state
         return (
             <>
-                <Card>
+                <Box>
                     <NotificationAlert ref="notify" />
-                    <CardBody>
+                    <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
                             <InputGroupAddon addonType="append">
@@ -134,9 +121,11 @@ export default class SubjectCard extends Component {
                                 }
                             </tbody>
                         </Table>
-                        <label className="float-right"><h6>Tổng cộng: {subjects.length}</h6></label>
-                    </CardBody>
-                </Card>
+                        <BoxFooter>
+                            <label className="float-right"><h6>Tổng cộng: {subjects.length}</h6></label>
+                        </BoxFooter>
+                    </BoxBody>
+                </Box>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalBody>
@@ -168,10 +157,10 @@ export default class SubjectCard extends Component {
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        {target_id == "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> THÊM</Button>} {' '}
-                        {target_id != "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> SỬA</Button>} {' '}
-                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> HỦY</Button> {' '}
-                        {target_id != "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> XÓA</Button>}
+                        {target_id == "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> Thêm</Button>} {' '}
+                        {target_id != "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> Sửa</Button>} {' '}
+                        <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> Hủy</Button> {' '}
+                        {target_id != "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
                     </ModalFooter>
                 </Modal>
 

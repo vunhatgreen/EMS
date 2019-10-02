@@ -4,7 +4,7 @@ import {
     CardBody
 } from 'reactstrap'
 
-export default class ConfigurationCard extends Component {
+export default class ConfigurationBox extends Component {
     state = {
 
     }

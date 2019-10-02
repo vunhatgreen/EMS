@@ -1,21 +1,8 @@
 import React, { Component } from 'react'
-import {
-    Input,
-    Table,
-    Label,
-    Row,
-    Col,
-    InputGroupAddon,
-    InputGroup,
-    FormGroup,
-    InputGroupText,
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle
-} from 'reactstrap'
+import { Input, Label, Row, Col, FormGroup } from 'reactstrap'
+import { Box, BoxBody, BoxHeader, BoxTitle } from '../../LibComponent/kapi'
 
-export default class ConfigurationCard extends Component {
+export default class GeneralConfigBox extends Component {
     state = {
 
     }
@@ -26,24 +13,29 @@ export default class ConfigurationCard extends Component {
         const { } = this.state
         return (
             <>
-                <Card>
-                    <CardBody>
+                <Box>
+                    <BoxHeader>
+                        <BoxTitle>
+                            THIẾT LẬP CHUNG
+                        </BoxTitle>
+                    </BoxHeader>
+                    <BoxBody>
                         <Row>
-                            <Col md="3">
+                            <Col>
                                 <FormGroup>
                                     <Label>Tên trường</Label>
                                     <Input></Input>
                                 </FormGroup>
                             </Col>
-                            <Col md="5">
+                            <Col>
                                 <FormGroup>
                                     <Label>Biểu tượng</Label>
                                     <Input></Input>
                                 </FormGroup>
                             </Col>
                         </Row>
-                    </CardBody>
-                </Card>
+                    </BoxBody>
+                </Box>
             </>
         )
     }
