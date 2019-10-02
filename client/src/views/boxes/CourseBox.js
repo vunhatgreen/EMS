@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
     Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText} from 'reactstrap'
-import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
+import { Box, BoxBody, BoxFooter } from "../../library/kapi"
 import axios from 'axios'
 
 export default class CourseBox extends Component {
@@ -74,7 +74,7 @@ export default class CourseBox extends Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                         </InputGroup>
-                        <Table hover>
+                        <Table responsive hover>
                             <thead className="text-primary">
                                 <tr>
                                     <th width="20%">Mã</th>

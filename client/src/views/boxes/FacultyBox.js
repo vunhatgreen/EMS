@@ -3,7 +3,7 @@ import {
     Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
 import NotificationAlert from 'react-notification-alert'
 import axios from 'axios'
-import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
+import { Box, BoxBody, BoxFooter } from "../../library/kapi"
 
 export default class FacultyBox extends Component {
     state = {
@@ -86,7 +86,7 @@ export default class FacultyBox extends Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                         </InputGroup>
-                        <Table hover>
+                        <Table responsive hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
                                     <th width="20%">Mã</th>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Input, Button, Label, Row, Col, FormGroup } from 'reactstrap'
-import { Box, BoxHeader, BoxBody, BoxTitle } from '../../LibComponent/kapi'
+import { Box, BoxHeader, BoxBody, BoxTitle } from '../../library/kapi'
 
 export default class CurrencyBox extends Component {
     state = {

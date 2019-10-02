@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
-import { Box, BoxBody, BoxFooter } from "../../LibComponent/kapi"
+import { Box, BoxBody, BoxFooter } from "../../library/kapi"
 import axios from 'axios'
 import NotificationAlert from 'react-notification-alert'
 
@@ -91,7 +91,7 @@ export default class SubjectBox extends Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                         </InputGroup>
-                        <Table hover>
+                        <Table responsive hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
                                     <th width="10%">Mã</th>

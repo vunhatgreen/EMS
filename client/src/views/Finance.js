@@ -9,11 +9,6 @@ export default class Finance extends Component {
     render() {
         return (
             <div>
-                <Row>
-                    <Col md="5">
-                        <CurrencyBox />
-                    </Col>
-                </Row>
             </div>
         )
     }

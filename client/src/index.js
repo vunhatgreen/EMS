@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history"
 import { Router, Route, Switch, Redirect } from "react-router-dom"
 import { Col, Button, Input } from 'reactstrap'
-import { Box, BoxBody } from "./LibComponent/kapi"
+import { Box, BoxBody } from "./library/kapi"
 import "bootstrap/dist/css/bootstrap.css"
 import "./assets/scss/paper-dashboard.scss?v=1.1.0"
 import "perfect-scrollbar/css/perfect-scrollbar.css"
-import "./LibComponent/kapi.css"
+import "./library/kapi.css"
 
 import AdminLayout from "./layouts/Admin"
 import axios from 'axios'

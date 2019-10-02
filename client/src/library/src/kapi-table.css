@@ -1,0 +1,79 @@
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th {
+    border-top: 1px solid #e8e8e8;
+    vertical-align: middle
+}
+
+.table thead th {
+    border-bottom-width: 1px;
+    border-top: 0;
+    font-weight: 600;
+    vertical-align: middle
+}
+
+.table thead.thead-lg th {
+    padding: 16px 10.5px
+}
+
+.table.no-border>tbody>tr>td {
+    border: 0 none!important
+}
+
+.table-bordered {
+    border: 1px solid #e8e8e8
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .04)
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, .05)
+}
+
+.table tr.success>td {
+    background-color: #dcf6f2!important
+}
+
+.table tr.info>td {
+    background-color: #dff6f7!important
+}
+
+.table tr.warning>td {
+    background-color: #fdf0db!important
+}
+
+.table tr.danger>td {
+    background-color: #fee6e7!important
+}
+
+.table-head-purple thead th {
+    background-color: #5c6bc0;
+    border-color: #5c6bc0;
+    color: #fff
+}
+
+.table-head-success thead th {
+    background-color: #18c5a9;
+    border-color: #18c5a9;
+    color: #fff
+}
+
+.table-border-purple,
+.table-border-purple td,
+.table-border-purple th {
+    border-color: #5c6bc0
+}
+
+.table-border-success,
+.table-border-success td,
+.table-border-success th {
+    border-color: #18c5a9
+}
+
+.thead-default th {
+    background: #ebedee
+}

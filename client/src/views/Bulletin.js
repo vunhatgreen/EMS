@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Badge } from 'reactstrap'
-import { Box, BoxBody, BoxHeader, BoxTitle } from "../LibComponent/kapi"
+import { Box, BoxBody, BoxHeader, BoxTitle } from "../library/kapi"
 
 export default class Bulletin extends Component {
     render() {
