@@ -17,8 +17,9 @@ const hist = createBrowserHistory()
 
 
 function View(props) {
-  const { screen, setScreen } = props
-  const [data, setData] = useState()
+  const {screen} = props
+  // const { screen, setScreen } = props
+  // const [data, setData] = useState()
   // const deleteCookie = async () => {
   //   try {
   //     await axios.get('/clear-cookie')

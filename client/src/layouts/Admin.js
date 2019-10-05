@@ -4,8 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PerfectScrollbar from 'perfect-scrollbar'
-var ps;
+// import PerfectScrollbar from 'perfect-scrollbar'
+// var ps;
 
 export default class Admin extends React.Component {
   constructor(props) {
@@ -52,19 +52,21 @@ export default class Admin extends React.Component {
         />
         <div className="main-panel" ref={this.mainPanel}>
           <Header {...this.props} />
-          <Switch>
-            <div className="content">
-              {routes.map((prop, key) => {
-                return (
-                  <Route
-                    path={prop.layout + prop.path}
-                    component={prop.component}
-                    key={key}
-                  />
-                );
-              })}
-            </div>
-          </Switch>
+          <div className="content">
+            <Switch>
+              <React.Fragment>
+                {routes.map((prop, key) => {
+                  return (
+                    <Route
+                      path={prop.layout + prop.path}
+                      component={prop.component}
+                      key={key}
+                    />
+                  );
+                })}
+              </React.Fragment>
+            </Switch>
+          </div>
           <Footer fluid />
         </div>
       </div>

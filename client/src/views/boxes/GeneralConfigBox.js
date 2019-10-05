@@ -10,7 +10,6 @@ export default class GeneralConfigBox extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { } = this.state
         return (
             <>
                 <Box>

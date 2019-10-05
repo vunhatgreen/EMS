@@ -46,7 +46,7 @@ export default class CurrencyBox extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Tỉ giá</Label>
-                                    <Input disabled={lock} value={rate} name="rate" onChange={this.change} />
+                                    <Input type="number" disabled={lock} value={rate} name="rate" onChange={this.change} />
                                 </FormGroup>
                             </Col>
                             <Col>
@@ -61,7 +61,7 @@ export default class CurrencyBox extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Giá trị tín chỉ</Label>
-                                    <Input disabled={lock} value={cost} name="cost" onChange={this.change} />
+                                    <Input type="number" disabled={lock} value={cost} name="cost" onChange={this.change} />
                                 </FormGroup>
                             </Col>
                             <Col>

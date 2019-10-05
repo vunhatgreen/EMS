@@ -1,0 +1,112 @@
+.nav-pills,
+.nav-tabs {
+    margin-bottom: 0px
+}
+
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+    color: #71808f
+}
+
+.nav-tabs .nav-link {
+    padding: .7rem 1rem
+}
+
+.tabs-line .nav-link {
+    -webkit-transition: all .25s;
+    -o-transition: all .25s;
+    transition: all .25s;
+    border-width: 0;
+    border-bottom: 1px solid transparent
+}
+
+.tabs-line .nav-link.active,
+.tabs-line .nav-link:hover {
+    color: #5c6bc0;
+    border-bottom-color: #5c6bc0
+}
+
+.tabs-line.tabs-line-2x .nav-link {
+    border-bottom-width: 2px
+}
+
+.tabs-line-success .nav-link.active,
+.tabs-line-success .nav-link:hover {
+    color: #18c5a9;
+    border-bottom-color: #18c5a9
+}
+
+.tabs-line-info .nav-link.active,
+.tabs-line-info .nav-link:hover {
+    color: #2cc4cb;
+    border-bottom-color: #2cc4cb
+}
+
+.tabs-line-warning .nav-link.active,
+.tabs-line-warning .nav-link:hover {
+    color: #f39c12;
+    border-bottom-color: #f39c12
+}
+
+.tabs-line-danger .nav-link.active,
+.tabs-line-danger .nav-link:hover {
+    color: #f75a5f;
+    border-bottom-color: #f75a5f
+}
+
+.tabs-line-pink .nav-link.active,
+.tabs-line-pink .nav-link:hover {
+    color: #ff4081;
+    border-bottom-color: #ff4081
+}
+
+.nav-pills .nav-link {
+    -webkit-transition: all ease-in-out .15s;
+    -o-transition: all ease-in-out .15s;
+    transition: all ease-in-out .15s
+}
+
+.nav-pills .nav-link.active {
+    background-color: #5c6bc0;
+    color: #fff
+}
+
+.nav-pills.nav-pills-rounded .nav-link.active {
+    -webkit-border-radius: 50px;
+    border-radius: 50px
+}
+
+.nav-pills.nav-pills-air .nav-link.active {
+    -webkit-box-shadow: 0 5px 20px #d6dee4;
+    box-shadow: 0 5px 20px #d6dee4
+}
+
+.nav-pills.nav-pills-air .nav-link.active:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.nav-pills-success .nav-link.active {
+    background-color: #18c5a9;
+    color: #fff
+}
+
+.nav-pills-info .nav-link.active {
+    background-color: #2cc4cb;
+    color: #fff
+}
+
+.nav-pills-warning .nav-link.active {
+    background-color: #f39c12;
+    color: #fff
+}
+
+.nav-pills-danger .nav-link.active {
+    background-color: #f75a5f;
+    color: #fff
+}
+
+.nav-pills-pink .nav-link.active {
+    background-color: #ff4081;
+    color: #fff
+}

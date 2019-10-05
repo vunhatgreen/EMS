@@ -1,9 +1,9 @@
-const User = require('../models/user')
+const Info = require('../models/info')
 
 module.exports = {
     create: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            User.create({ username: req.body.username, password: req.body.password, type: req.body.type }, (err, result) => {
+            Info.create({ username: req.body.username, name: req.body.name }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)
@@ -17,7 +17,7 @@ module.exports = {
     },
     update: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            User.updateOne({ username: req.params.password }, { '$set': { 'username': req.body.username, 'password': req.body.password, 'type': req.body.type } }, (err, result) => {
+            Info.updateOne({ username: req.params.password }, { '$set': { 'username': req.body.username, 'name': req.body.name } }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)
@@ -32,7 +32,7 @@ module.exports = {
 
     delete: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            User.deleteMany({ id: req.params.id }, (err, result) => {
+            Info.deleteMany({ username: req.params.username }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Không thể xóa dữ liệu!' })
                     console.log(err)
@@ -47,7 +47,7 @@ module.exports = {
 
     getOne: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            User.find({ id: req.params.id }, (err, result) => {
+            Info.find({ username: req.params.username }, (err, result) => {
                 res.json(result)
             })
         } else res.send("Bạn không có thẩm quyền truy cập")
@@ -55,7 +55,7 @@ module.exports = {
 
     getAll: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            User.find({}, (err, result) => {
+            Info.find({}, (err, result) => {
                 res.json(result)
             })
         } else res.send("Bạn không có thẩm quyền truy cập")

@@ -1,17 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    CardTitle,
-    FormGroup,
-    Form,
-    Input,
-    Row,
-    Col
-} from "reactstrap"
+import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Input, Row, Col } from "reactstrap"
 
 export default class User extends Component {
     render() {

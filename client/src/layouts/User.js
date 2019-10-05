@@ -1,9 +1,8 @@
 import React from 'react'
 import { Card, CardBody } from 'reactstrap'
 import Footer from '../components/Footer'
-import PerfectScrollbar from 'perfect-scrollbar'
-import MenuButton from '../components/MenuButton.js'
-var ps
+// import PerfectScrollbar from 'perfect-scrollbar'
+// var ps
 
 export default class Admin extends React.Component {
   // constructor(props) {
@@ -45,7 +44,6 @@ export default class Admin extends React.Component {
         <Card className="d-flex align-items-center">
 
           <CardBody>
-            <MenuButton iclass="nc-icon nc-bullet-list-67" value="Dashboard"/>
           </CardBody>
           <Footer fluid />
         </Card>

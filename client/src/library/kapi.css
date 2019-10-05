@@ -3,6 +3,8 @@
 @import './src/kapi-button.css';
 @import './src/kapi-text.css';
 @import './src/kapi-table.css';
+@import './src/kapi-nav&tab.css';
+@import './src/kapi-form.css';
 
 
 @font-face {

@@ -11,8 +11,6 @@ export default class SubjectBox extends Component {
         id: "",
         name: "",
         credit: 0,
-        prerequisite: "",
-        parallel: "",
         subjects: []
     }
     componentWillMount() {
@@ -40,7 +38,7 @@ export default class SubjectBox extends Component {
         }
     }
     toggleModal = subject => {
-        if (subject) this.setState({ id: subject.id, name: subject.name, credit: subject.credit, prerequisite: subject.prerequisite, parallel: subject.parallel, target_id: subject.id })
+        if (subject) this.setState({ id: subject.id, name: subject.name, credit: subject.credit, target_id: subject.id })
         else this.setState({ target_id: "" })
         this.setState(prevState => ({
             modal: !prevState.modal
@@ -50,9 +48,7 @@ export default class SubjectBox extends Component {
         axios.post('/api/subjects', {
             id: this.state.id,
             name: this.state.name,
-            credit: this.state.credit,
-            prerequisite: this.state.prerequisite,
-            parallel: this.state.parallel
+            credit: this.state.credit
         }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
@@ -67,7 +63,7 @@ export default class SubjectBox extends Component {
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/subjects/' + this.state.target_id, { id: this.state.id, name: this.state.name, credit: this.state.credit, prerequisite: this.state.prerequisite, parallel: this.state.parallel }).then(res => {
+        axios.put('/api/subjects/' + this.state.target_id, { id: this.state.id, name: this.state.name, credit: this.state.credit}).then(res => {
             this.alert(res.data.type, res.data.message)
         })
         this.getSubjects()
@@ -77,11 +73,11 @@ export default class SubjectBox extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { subjects, filter, id, name, credit, prerequisite, parallel, target_id } = this.state
+        const { subjects, filter, id, name, credit, target_id } = this.state
         return (
             <>
+                <NotificationAlert ref="notify" />
                 <Box>
-                    <NotificationAlert ref="notify" />
                     <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
@@ -94,11 +90,9 @@ export default class SubjectBox extends Component {
                         <Table responsive hover>
                             <thead className="text-primary">
                                 <tr onClick={() => this.toggleModal()} style={{ cursor: "pointer" }}>
-                                    <th width="10%">Mã</th>
+                                    <th>Mã</th>
                                     <th>Môn học</th>
-                                    <th width="10%">Số tín chỉ</th>
-                                    <th width="20%">Môn tiên quyết</th>
-                                    <th width="20%">Môn song hành</th>
+                                    <th>Số tín chỉ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,8 +106,6 @@ export default class SubjectBox extends Component {
                                                     <td>{subject.id}</td>
                                                     <td>{subject.name}</td>
                                                     <td>{subject.credit}</td>
-                                                    <td>{subject.prerequisite}</td>
-                                                    <td>{subject.parallel}</td>
                                                 </tr>
                                             }
                                         </>
@@ -135,32 +127,14 @@ export default class SubjectBox extends Component {
                             <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />
                             <Label>Số tín chỉ</Label>
-                            <Input value={credit} onChange={this.change} name="credit" />
-                            <Label>Môn tiên quyết</Label>
-                            <Input type="select" value={prerequisite} onChange={this.change} name="prerequisite">
-                                <option></option>
-                                {
-                                    subjects.map((subject) =>
-                                        <option value={subject.id}>{subject.name} ({subject.id})</option>
-                                    )
-                                }
-                            </Input>
-                            <Label>Môn song hành</Label>
-                            <Input type="select" value={parallel} onChange={this.change} name="parallel">
-                                <option></option>
-                                {
-                                    subjects.map((subject) =>
-                                        <option value={subject.id}>{subject.name} ({subject.id})</option>
-                                    )
-                                }
-                            </Input>
+                            <Input type="number" value={credit} onChange={this.change} name="credit" />
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        {target_id == "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> Thêm</Button>} {' '}
-                        {target_id != "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> Sửa</Button>} {' '}
+                        {target_id === "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> Thêm</Button>} {' '}
+                        {target_id !== "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> Sửa</Button>} {' '}
                         <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> Hủy</Button> {' '}
-                        {target_id != "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
+                        {target_id !== "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
                     </ModalFooter>
                 </Modal>
 

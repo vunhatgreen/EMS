@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
+import { Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
 import { Box, BoxBody, BoxFooter } from "../../library/kapi"
 import axios from 'axios'
 import NotificationAlert from 'react-notification-alert'
@@ -87,8 +86,8 @@ export default class MajorBox extends Component {
         const { majors, faculties, filter, id, name, faculty, target_id } = this.state
         return (
             <>
+                <NotificationAlert ref="notify" />
                 <Box>
-                    <NotificationAlert ref="notify" />
                     <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
@@ -148,10 +147,10 @@ export default class MajorBox extends Component {
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        {target_id == "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> Thêm</Button>} {' '}
-                        {target_id != "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> Sửa</Button>} {' '}
+                        {target_id === "" && <Button color="primary" onClick={this.add}><i className="nc-icon nc-check-2" /> Thêm</Button>} {' '}
+                        {target_id !== "" && <Button color="primary" onClick={this.edit}><i class="nc-icon nc-check-2" /> Sửa</Button>} {' '}
                         <Button color="secondary" onClick={this.toggleModal}><i class="nc-icon nc-simple-remove" /> Hủy</Button> {' '}
-                        {target_id != "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
+                        {target_id !== "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
                     </ModalFooter>
                 </Modal>
             </>

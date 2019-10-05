@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
+import { Input, Label, Modal, FormGroup, ModalBody, ModalFooter, Button, Table, InputGroupAddon, InputGroup, InputGroupText } from 'reactstrap'
 import NotificationAlert from 'react-notification-alert'
 import axios from 'axios'
 import { Box, BoxBody, BoxFooter } from "../../library/kapi"
@@ -75,8 +74,8 @@ export default class FacultyBox extends Component {
         const { faculties, filter, id, name, target_id } = this.state
         return (
             <>
+                <NotificationAlert ref="notify" />
                 <Box>
-                    <NotificationAlert ref="notify" />
                     <BoxBody>
                         <InputGroup className="no-border">
                             <Input onChange={this.change} name="filter" value={filter} placeholder="Tìm kiếm theo mã hoặc tên..." />
@@ -132,7 +131,6 @@ export default class FacultyBox extends Component {
                         {target_id !== "" && <Button color="danger" onClick={this.delete}><i class="nc-icon nc-simple-delete" /> Xóa</Button>}
                     </ModalFooter>
                 </Modal>
-
             </>
         )
     }
