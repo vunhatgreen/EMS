@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col } from 'reactstrap'
-import FacultyBox from './boxes/FacultyBox'
+import DepartmentBox from './boxes/DepartmentBox'
 import MajorBox from './boxes/MajorBox'
 import CourseBox from './boxes/CourseBox'
 import MemberBox from './boxes/MemberBox'
@@ -75,7 +75,7 @@ export default class Tables extends Component {
                     <TabPane tabId="1">
                         <Row>
                             <Col>
-                                <FacultyBox />
+                                <DepartmentBox />
                             </Col>
                         </Row>
                     </TabPane>

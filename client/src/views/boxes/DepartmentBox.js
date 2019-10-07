@@ -4,16 +4,16 @@ import NotificationAlert from 'react-notification-alert'
 import axios from 'axios'
 import { Box, BoxBody, BoxFooter } from "../../library/kapi"
 
-export default class FacultyBox extends Component {
+export default class DepartmentBox extends Component {
     state = {
         filter: "",
         target_id: "",
         id: "",
         name: "",
-        faculties: []
+        departments: []
     }
     componentWillMount() {
-        this.getFaculties()
+        this.getDepartments()
     }
     alert(type, message) {
         this.refs.notify.notificationAlert({
@@ -31,47 +31,47 @@ export default class FacultyBox extends Component {
             });
         }
     }
-    toggleModal = faculty => {
-        if (faculty) this.setState({ id: faculty.id, name: faculty.name, target_id: faculty.id })
+    toggleModal = department => {
+        if (department) this.setState({ id: department.id, name: department.name, target_id: department.id })
         else this.setState({ target_id: "" })
         this.setState(prevState => ({
             modal: !prevState.modal
         }))
     }
-    getFaculties() {
-        axios.get("/api/faculties").then(res =>
-            this.setState({ faculties: res.data })
+    getDepartments() {
+        axios.get("/api/departments").then(res =>
+            this.setState({ departments: res.data })
         )
     }
     add = e => {
-        axios.post('/api/faculties', {
+        axios.post('/api/departments', {
             id: this.state.id,
             name: this.state.name
         }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     delete = e => {
-        axios.delete('/api/faculties/' + this.state.id).then(res => {
+        axios.delete('/api/departments/' + this.state.id).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/faculties/' + this.state.target_id, { id: this.state.id, name: this.state.name }).then(res => {
+        axios.put('/api/departments/' + this.state.target_id, { id: this.state.id, name: this.state.name }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     change = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { faculties, filter, id, name, target_id } = this.state
+        const { departments, filter, id, name, target_id } = this.state
         return (
             <>
                 <NotificationAlert ref="notify" />
@@ -94,14 +94,14 @@ export default class FacultyBox extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    faculties.map((faculty) =>
+                                    departments.map((department) =>
                                         <>
                                             {
-                                                (faculty.id.includes(filter) || faculty.name.toLowerCase().includes(filter.toLowerCase()))
+                                                (department.id.includes(filter) || department.name.toLowerCase().includes(filter.toLowerCase()))
                                                 &&
-                                                <tr onClick={() => this.toggleModal(faculty)} style={{ cursor: "pointer" }}>
-                                                    <td>{faculty.id}</td>
-                                                    <td>{faculty.name}</td>
+                                                <tr onClick={() => this.toggleModal(department)} style={{ cursor: "pointer" }}>
+                                                    <td>{department.id}</td>
+                                                    <td>{department.name}</td>
                                                 </tr>
                                             }
                                         </>
@@ -110,7 +110,7 @@ export default class FacultyBox extends Component {
                             </tbody>
                         </Table>
                         <BoxFooter>
-                            <label className="float-right"><h6>Tổng cộng: {faculties.length}</h6></label>
+                            <label className="float-right"><h6>Tổng cộng: {departments.length}</h6></label>
                         </BoxFooter>
                     </BoxBody>
                 </Box>

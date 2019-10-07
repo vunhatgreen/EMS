@@ -3,7 +3,7 @@ const Major = require('../models/major')
 module.exports = {
     create: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Major.create({ id: req.body.id, name: req.body.name, faculty: req.body.faculty }, (err, result) => {
+            Major.create({ id: req.body.id, name: req.body.name, department: req.body.department }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)
@@ -17,7 +17,7 @@ module.exports = {
     },
     update: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Major.updateOne({ id: req.params.id }, { '$set': { 'id': req.body.id, 'name': req.body.name, 'faculty': req.body.faculty } }, (err, result) => {
+            Major.updateOne({ id: req.params.id }, { '$set': { 'id': req.body.id, 'name': req.body.name, 'department': req.body.department } }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)

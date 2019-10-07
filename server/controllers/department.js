@@ -1,10 +1,10 @@
-const Faculty = require('../models/faculty')
+const Department = require('../models/department')
 const Major = require('../models/major')
 
 module.exports = {
     create: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Faculty.create({ id: req.body.id, name: req.body.name }, (err, result) => {
+            Department.create({ id: req.body.id, name: req.body.name }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)
@@ -19,7 +19,7 @@ module.exports = {
     },
     update: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Faculty.updateOne({ id: req.params.id }, { '$set': { 'id': req.body.id, 'name': req.body.name } }, (err, result) => {
+            Department.updateOne({ id: req.params.id }, { '$set': { 'id': req.body.id, 'name': req.body.name } }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Dữ liệu nhập có vấn đề!' })
                     console.log(err)
@@ -30,7 +30,7 @@ module.exports = {
                     console.log(result)
                 }
             })
-            Major.updateMany({ faculty: req.params.id }, { '$set': { 'faculty': req.body.id } }, (err, result) => {
+            Major.updateMany({ department: req.params.id }, { '$set': { 'department': req.body.id } }, (err, result) => {
                 console.log(result)
             })
         } else res.send("Bạn không có thẩm quyền truy cập")
@@ -38,7 +38,7 @@ module.exports = {
 
     delete: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Faculty.deleteMany({ id: req.params.id }, (err, result) => {
+            Department.deleteMany({ id: req.params.id }, (err, result) => {
                 if (err) {
                     res.send({ type: 'danger', message: 'Không thể xóa dữ liệu!' })
                     console.log(err)
@@ -53,7 +53,7 @@ module.exports = {
 
     getOne: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Faculty.find({ id: req.params.id }, (err, result) => {
+            Department.find({ id: req.params.id }, (err, result) => {
                 res.json(result)
             })
         } else res.send("Bạn không có thẩm quyền truy cập")
@@ -61,7 +61,7 @@ module.exports = {
 
     getAll: (req, res) => {
         if (req.signedCookies.name === 'admin') {
-            Faculty.find({}, (err, result) => {
+            Department.find({}, (err, result) => {
                 res.json(result)
             })
         } else res.send("Bạn không có thẩm quyền truy cập")

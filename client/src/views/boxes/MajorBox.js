@@ -10,13 +10,13 @@ export default class MajorBox extends Component {
         target_id: "",
         id: "",
         name: "",
-        faculty: "",
+        department: "",
         majors: [],
-        faculties: [],
+        departments: [],
     }
     componentWillMount() {
         this.getMajors()
-        this.getFaculties()
+        this.getDepartments()
     }
     alert(type, message) {
         this.refs.notify.notificationAlert({
@@ -32,9 +32,9 @@ export default class MajorBox extends Component {
             this.setState({ majors: res.data })
         )
     }
-    getFaculties() {
-        axios.get("/api/faculties").then(res =>
-            this.setState({ faculties: res.data })
+    getDepartments() {
+        axios.get("/api/departments").then(res =>
+            this.setState({ departments: res.data })
         )
     }
     toggle(tab) {
@@ -49,8 +49,8 @@ export default class MajorBox extends Component {
     }
 
     toggleModal = major => {
-        this.getFaculties()
-        if (major) this.setState({ id: major.id, name: major.name, faculty: major.faculty, target_id: major.id })
+        this.getDepartments()
+        if (major) this.setState({ id: major.id, name: major.name, department: major.department, target_id: major.id })
         else this.setState({ target_id: "" })
         this.setState(prevState => ({
             modal: !prevState.modal
@@ -61,7 +61,7 @@ export default class MajorBox extends Component {
         axios.post('/api/majors', {
             id: this.state.id,
             name: this.state.name,
-            faculty: this.state.faculty
+            department: this.state.department
         }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
@@ -76,14 +76,14 @@ export default class MajorBox extends Component {
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/majors/' + this.state.target_id, { id: this.state.id, name: this.state.name, faculty: this.state.faculty }).then(res => {
+        axios.put('/api/majors/' + this.state.target_id, { id: this.state.id, name: this.state.name, department: this.state.department }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
         this.getMajors()
         this.toggleModal()
     }
     render() {
-        const { majors, faculties, filter, id, name, faculty, target_id } = this.state
+        const { majors, departments, filter, id, name, department, target_id } = this.state
         return (
             <>
                 <NotificationAlert ref="notify" />
@@ -115,7 +115,7 @@ export default class MajorBox extends Component {
                                                 <tr onClick={() => this.toggleModal(major)} style={{ cursor: "pointer" }}>
                                                     <td>{major.id}</td>
                                                     <td>{major.name}</td>
-                                                    <td>{major.faculty}</td>
+                                                    <td>{major.department}</td>
                                                 </tr>
                                             }
                                         </>
@@ -137,10 +137,10 @@ export default class MajorBox extends Component {
                             <Label>Tên</Label>
                             <Input value={name} onChange={this.change} name="name" />
                             <Label>Khoa</Label>
-                            <Input type="select" name="faculty" value={faculty} onChange={this.change}>
+                            <Input type="select" name="department" value={department} onChange={this.change}>
                                 {
-                                    faculties.map((faculty) =>
-                                        <option value={faculty.id}>{faculty.name} ({faculty.id})</option>
+                                    departments.map((department) =>
+                                        <option value={department.id}>{department.name} ({department.id})</option>
                                     )
                                 }
                             </Input>

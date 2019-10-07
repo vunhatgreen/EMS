@@ -9,7 +9,7 @@ module.exports = mongoose.model('Major', new mongoose.Schema({
         type: String,
         required: true
     },
-    faculty: {
+    department: {
         type: String,
         required: true
     }

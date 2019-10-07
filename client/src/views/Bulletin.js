@@ -17,40 +17,40 @@ export default class Bulletin extends Component {
             });
         }
     }
-    toggleModal = faculty => {
-        if (faculty) this.setState({ id: faculty.id, name: faculty.name, target_id: faculty.id })
+    toggleModal = department => {
+        if (department) this.setState({ id: department.id, name: department.name, target_id: department.id })
         else this.setState({ target_id: "" })
         this.setState(prevState => ({
             modal: !prevState.modal
         }))
     }
-    getFaculties() {
-        axios.get("/api/faculties").then(res =>
-            this.setState({ faculties: res.data })
+    getDepartments() {
+        axios.get("/api/departments").then(res =>
+            this.setState({ departments: res.data })
         )
     }
     add = e => {
-        axios.post('/api/faculties', {
+        axios.post('/api/departments', {
             id: this.state.id,
             name: this.state.name
         }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     delete = e => {
-        axios.delete('/api/faculties/' + this.state.id).then(res => {
+        axios.delete('/api/departments/' + this.state.id).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     edit = e => {
-        axios.put('/api/faculties/' + this.state.target_id, { id: this.state.id, name: this.state.name }).then(res => {
+        axios.put('/api/departments/' + this.state.target_id, { id: this.state.id, name: this.state.name }).then(res => {
             this.alert(res.data.type, res.data.message)
         })
-        this.getFaculties()
+        this.getDepartments()
         this.toggleModal()
     }
     change = e => {

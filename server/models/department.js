@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-module.exports = mongoose.model('Faculty', new mongoose.Schema({
+module.exports = mongoose.model('Department', new mongoose.Schema({
     id: {
         type: String,
         unique: true,
